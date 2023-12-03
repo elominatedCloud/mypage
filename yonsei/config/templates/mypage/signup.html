@@ -1,0 +1,54 @@
+{% extends "./base.html" %}
+{% load static %}
+{% block signup %}
+<!-- static 폴더내에 존재하는 index.css 파일 사용 -->
+<link rel="stylesheet" href="{% static 'css/signup.css' %}"/>
+
+<div class="signup-container">
+  <div class="signup-box">
+    <h2 class="signup-title">회원가입</h2> 
+
+    <form method="POST" class="signup-form">
+      {% csrf_token %}
+      <div class="signup-inputs">
+        <div class="form-group">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+          </div>
+          <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+          </div>
+          <div class="form-group">
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+          </div>
+          <div class="form-group">
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+          </div>
+          <div class="error">
+            {% if form.errors %}
+            <ul>
+                {% for field, error_list in form.errors.items %}
+                    {% for error in error_list %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>        
+      </div>
+      <div class="signup-actions">
+        <button type="submit" class="signup-button">가입하기</button>
+      </div>
+    </form>
+    
+    {% if user_created %}
+    <p>가입이 완료되었습니다. 로그인하세요.</p>
+    <a href="/login">로그인 페이지로 이동</a>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+# venv
+venv
+
+# mac
+.DS_store
+
+# VScode
+yonsei.code-workspace
